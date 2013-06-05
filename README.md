@@ -26,6 +26,17 @@ python server.py
 界面演示
 ======
 
+主界面
+![main](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/main.jpg)
+
+报表界面
+![report](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/report.jpg)
+
+选人界面
+![select](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/select.jpg)
+
+操作界面
+![op](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/op.jpg)
 
 计划
 ======
