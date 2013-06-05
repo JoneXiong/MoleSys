@@ -1,0 +1,17 @@
+  <div class="well" id="filter-wrapper" style="display: none;">
+    <div class="hidden" id="filter-fields">
+      {% for field in filter_form %}
+        {{ field() }}
+      {% endfor %}
+    </div>
+    <form action="." class="form-inline modeladmin-filters" method="get">
+      {% if ordering %}<input type="hidden" name="ordering" value="{{ ordering }}" />{% endif %}
+      <div class="row-fluid">
+        <div class="pull-right">
+          <button class="btn btn-primary small" type="submit">Apply</button>
+          <a class="btn small" href=".">Reset</a>
+        </div>
+        <div class="filter-list"></div>
+      </div>
+    </form>
+  </div>

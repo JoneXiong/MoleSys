@@ -1,0 +1,62 @@
+{% extends "admin/models/base_filters.html" %}
+
+{% block breadcrumbs %}
+ {{ super() }}
+ <li><span class="divider">/</span> <a href=".">导出</a></li>
+{% endblock %}
+
+{% block tab_export_class %}active{% endblock %}
+
+{% block extra_tabs %}
+    {% include "admin/includes/filter_dropdown.html" %}
+{% endblock %}
+
+{% block content %}
+  {% include "admin/includes/filter_widgets.html" %}
+
+  <div class="well">
+    <h4 id="export-summary">Currently {{ query.count() }} records are scheduled for export <small><a href="#" onclick="$('#export-details').toggle();">details</a></small></h4>
+    <div id="export-details" style="display:none;">
+      <pre>SQL:
+{{ sql[0] }}
+
+PARAMS:
+{{ sql[1] }}</pre>
+    </div>
+  </div>
+
+  <form action="./?{{ request.query_string }}" class="form-horizontal" method="post">
+    <fieldset>
+      <legend>Select fields to export</legend>
+      <div class="control-group">
+        <label class="control-label">Fields on {{ model.__name__ }}</label>
+        <div class="controls">
+          {% for field in model._meta.get_fields() %}
+            <label class="checkbox">
+              <input type="checkbox" name="fields" value="{{ field.name }}" checked="checked" /> {{ field.name }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% for (model, path), fields in related_fields.items() %}
+        <legend>Select related fields to export</legend>
+        <div class="control-group">
+          <label class="control-label">Fields on {{ model.__name__ }}</label>
+          <div class="controls">
+            {% for field in fields %}
+              <label class="checkbox">
+                <input type="checkbox" name="fields" value="{{ path }}__{{ field.name }}" /> {{ field.name }}
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">导出 JSON</button>
+        <a class="btn" href="{{ url_for(model_admin.get_url_name('index')) }}?{{ request.query_string }}">Cancel</a>
+      </div>
+    </fieldset>
+  </form>
+{% endblock %}
