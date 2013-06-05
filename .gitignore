@@ -9,3 +9,6 @@
 .settings/
 .loadpath
 *.pyc
+
+Thumbs.db
+.tmp_*

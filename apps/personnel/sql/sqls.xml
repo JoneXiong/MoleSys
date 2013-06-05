@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlgroup>
+	<sql id = "emp_select">
+		<content engine="default">
+			<![CDATA[
+                select u.userid,u.badgenumber,u.name,d.DeptName,d.code,d.DeptID
+                    from userinfo u
+                    left join departments  d on d.DeptID=u.defaultdeptid
+                    where u.status=0
+			]]>
+		</content>	
+	</sql>
+	
+	<sql id = "dept_select">
+		<content engine="default">
+			<![CDATA[
+		               select DeptID,code,DeptName from departments 
+                    where status=0
+			]]>
+		</content>	
+    </sql>
+		
+	<sql id = "area_select">
+		<content engine="default">
+			<![CDATA[
+	                select id,areaid,areaname from personnel_area
+                where status = 0 
+			]]>
+		</content>	
+    </sql>
+</sqlgroup>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlgroup>
+	<sql id = "SumAttReport">
+		<content engine="default">
+			<![CDATA[
+            select u.userid,d.DeptID,u.name,u.badgenumber,d.DeptName,
+                SUM(ar.WorkDay) attTimes_sum,
+                SUM(ar.RealWorkDay) attDays_sum,
+                SUM(ar.OverTime) overtimes_sum,
+                SUM(ar.WorkTime) leaveimes_sum,
+                SUM(ar.AttTime) stopWorkTimes_sum,
+                1 completionRate 
+            from attshifts ar
+            left join userinfo u on u.userid =  ar.userid
+            left join departments d on u.defaultdeptid = d.DeptID
+            where 1=1 
+                group by u.userid,u.name,u.badgenumber,d.DeptName,d.DeptID
+			]]>
+		</content>	
+	</sql>
+	
+	<sql id = "OrderAttReport">
+		<content engine="default">
+			<![CDATA[
+            select ar.id,u.userid,d.DeptID,u.name,u.badgenumber,d.DeptName,
+                ar.AttDate attdate,
+                ar.WorkDay attTimes,
+                ar.RealWorkDay attdays,
+                ar.OverTime overtimes,
+                ar.WorkTime leaveimes,
+                ar.AttTime stopWorkTimes
+                from attshifts ar
+                left join userinfo u on ar.userid = u.userid
+                left join departments d on u.defaultdeptid = d.DeptID
+                where u.status=0
+			]]>
+		</content>	
+    </sql>
+		
+</sqlgroup>
+

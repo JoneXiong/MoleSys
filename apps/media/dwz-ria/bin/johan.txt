@@ -1,0 +1,2 @@
+
+type ..\js\dwz.extend.js >> dwzESC.js
