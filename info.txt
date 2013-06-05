@@ -1,0 +1,834 @@
+﻿版本: 9045
+作者: xiaoxj
+日期: 18:56:04, 2012年5月23日
+信息:
+485通讯，实时监控界面显示图标正常，设备监控界面当前状态显示正常，但操作类型为连接，显示是错误的，正确的应该是显示获取实时事件
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 9038
+作者: xjh
+日期: 15:02:20, 2012年5月23日
+信息:
+修复卡号处理的bug
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/device_http/conv_emp.py
+
+版本: 9034
+作者: xjh
+日期: 09:15:30, 2012年5月23日
+信息:
+发卡管理配置项修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_att.py
+
+版本: 9018
+作者: qj
+日期: 16:13:52, 2012年5月21日
+信息:
+修改退卡不能操作问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/templates/IssueCard_opform_OpRetireCard.html
+
+版本: 9014
+作者: xiaoxj
+日期: 13:24:54, 2012年5月21日
+信息:
+去掉多余的打印信息
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 9013
+作者: qj
+日期: 13:11:13, 2012年5月21日
+信息:
+无法删除人员问题所做修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/urls.py
+
+版本: 9012
+作者: qj
+日期: 13:10:49, 2012年5月21日
+信息:
+无法删除人员问题所做修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/urls.py
+
+版本: 9011
+作者: qj
+日期: 13:10:22, 2012年5月21日
+信息:
+无法删除人员问题所做修改：去掉公用头文件引用中，对pos的引用
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_emp.py
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_iccard.py
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_meal.py
+
+版本: 9010
+作者: xiaoxj
+日期: 13:04:03, 2012年5月21日
+信息:
+去掉重复的引入
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_iccard.py
+
+版本: 9009
+作者: qj
+日期: 13:01:01, 2012年5月21日
+信息:
+删除无用的引用
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/urls.py
+
+版本: 9008
+作者: qj
+日期: 12:59:56, 2012年5月21日
+信息:
+无法删除人员问题所做修改：会议引用错误
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/room.py
+
+版本: 9007
+作者: qj
+日期: 12:58:32, 2012年5月21日
+信息:
+无法删除人员问题所做修改：去掉公用头文件引用中，对pos的引用
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8997
+作者: gxw
+日期: 09:49:42, 2012年5月19日
+信息:
+尝试解决删除人员报MEETING，POS子系统错误
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/urls.py
+已修改 : /tags/_20120320/units/adms/mysite/personnel/urls.py
+已修改 : /tags/_20120320/units/adms/mysite/pos/urls.py
+
+版本: 8981
+作者: qj
+日期: 16:36:36, 2012年5月17日
+信息:
+ic消费设备数据上传修改：对设备里面滴测试数据，进行有效过滤
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/ic_pos_devview.py
+
+版本: 8963
+作者: zhengyg
+日期: 13:35:44, 2012年5月16日
+信息:
+单独考勤时 员工自助无初始化密码
+----
+替换 : /tags/_20120320/units/adms/mysite/config_att.py
+
+版本: 8948
+作者: qj
+日期: 14:23:06, 2012年5月14日
+信息:
+门禁，关闭辅助输出操作，权限判断错误修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/templates/Device_opform_OpCloseAuxOut.html
+
+版本: 8947
+作者: qj
+日期: 14:22:05, 2012年5月14日
+信息:
+设备管理用户角色权限配置修改         针对各子系统
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8935
+作者: qj
+日期: 14:45:59, 2012年5月9日
+信息:
+回滚上一版本滴修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config__add_ic.py
+已修改 : /tags/_20120320/units/adms/mysite/config__add_id.py
+
+版本: 8934
+作者: zhangxl
+日期: 14:23:09, 2012年5月9日
+信息:
+单独会议下发区域人员无法显示右侧的人员选择框
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/urls.py
+
+版本: 8933
+作者: zhangxl
+日期: 14:22:43, 2012年5月9日
+信息:
+单独会议下发区域人员无法显示右侧的人员选择框
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/templates/Area_opform_OpAdjustArea.html
+
+版本: 8932
+作者: qj
+日期: 13:11:30, 2012年5月9日
+信息:
+添加引用
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/device_http/device_view.py
+
+版本: 8931
+作者: xiaoxj
+日期: 12:57:18, 2012年5月9日
+信息:
+加入梯控子系统的时候，执行同步数据库命令时，报错（已修改）
+----
+已修改 : /tags/_20120320/units/adms/mysite/elevator/models/models.py
+
+版本: 8930
+作者: xiaoxj
+日期: 10:43:48, 2012年5月9日
+信息:
+以485协议添加门禁控制器时，设备列表处和门设置处的设备状态显示错误问题（已修改）
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8928
+作者: qj
+日期: 14:03:18, 2012年5月8日
+信息:
+有考勤，跟门禁时候，门禁做考勤使用参数放开
+----
+已修改 : /tags/_20120320/units/adms/mysite/config__add_ic.py
+已修改 : /tags/_20120320/units/adms/mysite/config__add_id.py
+
+版本: 8927
+作者: qj
+日期: 13:25:10, 2012年5月8日
+信息:
+ID消费设备联机固件版本保存修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/posdevview.py
+
+版本: 8926
+作者: xiaoxj
+日期: 10:13:41, 2012年5月8日
+信息:
+在设备列表中删除设备过后，设备监控处不能实时的删除设备，必须重启服务过后设备才会消失，现已修改为同步删除
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8925
+作者: zhangxl
+日期: 08:23:56, 2012年5月8日
+信息:
+单独门禁配置文件的修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_iaccess.py
+
+版本: 8924
+作者: qj
+日期: 08:19:49, 2012年5月8日
+信息:
+在线帮助文档，关于门禁显示修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/templates/help_default_zh-cn.html
+
+版本: 8921
+作者: xiaoxj
+日期: 15:40:01, 2012年5月7日
+信息:
+回滚settings.py文件配置
+----
+已修改 : /tags/_20120320/units/adms/mysite/settings.py
+
+版本: 8920
+作者: xiaoxj
+日期: 15:29:10, 2012年5月7日
+信息:
+1.单独门禁时，编辑单个的门不可以出现考勤勾选项；
+2.设置MAX_COMMAND_TIMEOUT_SECOND=60，防止获取控制器上的事件记录时，时间太短，导致无法获取全部记录
+3.单独门禁时，在我的工作面板中应该有门禁快速上手模块
+4.单独门禁时，在人员编辑界面不出现"设置考勤"选项
+5.增加单独门禁时的settings_iaccess.py和config_iaccess.py配置文件
+----
+已增加 : /tags/_20120320/units/adms/mysite/config_iaccess.py
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/templates/AccDoor_edit.html
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+已修改 : /tags/_20120320/units/adms/mysite/media/jslib/CDrag.js
+已修改 : /tags/_20120320/units/adms/mysite/personnel/templates/Employee_edit.html
+已修改 : /tags/_20120320/units/adms/mysite/settings.py
+已增加 : /tags/_20120320/units/adms/mysite/settings_iaccess.py
+
+版本: 8919
+作者: xiaoxj
+日期: 13:39:24, 2012年5月7日
+信息:
+屏蔽掉多余的打印信息以及代码格式调整
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/dev_comm_center.py
+已修改 : /tags/_20120320/units/adms/mysite/iclock/dataprocaction.py
+已修改 : /tags/_20120320/units/adms/mysite/iclock/templates/Device_edit.html
+
+版本: 8916
+作者: zhengyg
+日期: 12:49:26, 2012年5月7日
+信息:
+导出优化,支持自定义导出
+若要自定义导出,在Admin中配置 api_fields属性.新增的自定义字段的显示名字为该字段的获取方法的函数注释
+导出api_fields的配置的优先级大于list_display的配置.记有api_fields的属性时以api_fields为主,若没有则以list_display为主.
+----
+已修改 : /tags/_20120320/python-support/dbapp/datautils.py
+已修改 : /tags/_20120320/units/adms/mysite/api/views.py
+
+版本: 8915
+作者: qj
+日期: 08:46:20, 2012年5月7日
+信息:
+单独消费系统配置文件修改（显示个人照片上传，操作）
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_ic.py
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_id.py
+
+版本: 8914
+作者: xiaoxj
+日期: 18:42:51, 2012年5月5日
+信息:
+门禁做考勤用时，修改数据不能插入的问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/dev_comm_center.py
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/process_comm_data.py
+
+版本: 8912
+作者: xiaoxj
+日期: 08:12:40, 2012年5月5日
+信息:
+门禁控制器作考勤用时，数据保存速度优化
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/process_comm_data.py
+
+版本: 8907
+作者: zhangxl
+日期: 16:38:22, 2012年5月3日
+信息:
+单独考勤--去掉人事里添加和删除所属权限操作
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_att.py
+
+版本: 8905
+作者: luzyong
+日期: 13:38:13, 2012年5月3日
+信息:
+bug修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/model_meeting.py
+
+版本: 8904
+作者: luzyong
+日期: 13:37:46, 2012年5月3日
+信息:
+增加导入会议人员
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/meeting_emp.py
+
+版本: 8903
+作者: luzyong
+日期: 13:36:54, 2012年5月3日
+信息:
+import Room
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/__init__.py
+
+版本: 8902
+作者: luzyong
+日期: 13:36:09, 2012年5月3日
+信息:
+import Room
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/statistics.py
+
+版本: 8901
+作者: luzyong
+日期: 13:35:44, 2012年5月3日
+信息:
+import Room
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/views.py
+
+版本: 8900
+作者: luzyong
+日期: 13:35:00, 2012年5月3日
+信息:
+
+----
+已增加 : /tags/_20120320/units/adms/mysite/iclock/models/room.py
+
+版本: 8899
+作者: qj
+日期: 10:25:34, 2012年5月3日
+信息:
+卡余额表mysql查询报错问题修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/pos_reports.py
+
+版本: 8888
+作者: qj
+日期: 15:07:36, 2012年4月28日
+信息:
+卡管理帮助文档修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/templates/IssueCard_list.html
+已修改 : /tags/_20120320/units/adms/mysite/templates/help_default_zh-cn.html
+
+版本: 8877
+作者: zhangxl
+日期: 16:25:59, 2012年4月27日
+信息:
+修改了单独会议登录后IE6无logo的问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_meeting.py
+
+版本: 8876
+作者: zhangxl
+日期: 16:25:42, 2012年4月27日
+信息:
+修改了单独会议登录后IE6无logo的问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/css/css.css
+
+版本: 8875
+作者: zhangxl
+日期: 15:58:51, 2012年4月27日
+信息:
+单独会议
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_meeting.py
+
+版本: 8874
+作者: zhangxl
+日期: 15:57:09, 2012年4月27日
+信息:
+门禁+考勤配置
+----
+已修改 : /tags/_20120320/units/adms/mysite/config.py
+
+版本: 8872
+作者: qj
+日期: 15:13:46, 2012年4月27日
+信息:
+修改初始化数据库，后台报错问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_emp.py
+
+版本: 8871
+作者: zhangxl
+日期: 15:09:22, 2012年4月27日
+信息:
+增加单独会议的版本号
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/jslib/init_base_frame.js
+
+版本: 8870
+作者: zhangxl
+日期: 15:08:55, 2012年4月27日
+信息:
+单独会议logo的配置修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/css/css.css
+
+版本: 8869
+作者: zhangxl
+日期: 15:08:26, 2012年4月27日
+信息:
+会议子系统配置的修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config.py
+
+版本: 8868
+作者: zhangxl
+日期: 13:49:22, 2012年4月27日
+信息:
+单独会议子系统配置的修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_meeting.py
+
+版本: 8867
+作者: xiaoxj
+日期: 12:50:39, 2012年4月27日
+信息:
+格式规范
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/templates/AccLinkageIO_list.html
+
+版本: 8866
+作者: qj
+日期: 12:31:55, 2012年4月27日
+信息:
+带消费的情况下，卡管理挂失操作修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 8864
+作者: zhangxl
+日期: 08:57:09, 2012年4月27日
+信息:
+添加单独会议的配置文件
+----
+已增加 : /tags/_20120320/units/adms/mysite/config_meeting.py
+
+版本: 8855
+作者: luzyong
+日期: 15:55:20, 2012年4月26日
+信息:
+打开保存会议签到签退记录的方法：getAndSaveMeetingOriginalRecord
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/views.py
+
+版本: 8853
+作者: luzyong
+日期: 13:41:49, 2012年4月26日
+信息:
+
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/__init__.py
+
+版本: 8852
+作者: luzyong
+日期: 13:41:04, 2012年4月26日
+信息:
+屏蔽手动获取数据
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/meeting_record.py
+
+版本: 8851
+作者: luzyong
+日期: 13:40:07, 2012年4月26日
+信息:
+会议统计验证之后的记录
+----
+已增加 : /tags/_20120320/units/adms/mysite/meeting/models/meeting_ValidRecord.py
+
+版本: 8850
+作者: luzyong
+日期: 13:32:18, 2012年4月26日
+信息:
+增加一个判断：需补签人员是否有请假记录，有则删除才能补签
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/meeting_exact.py
+
+版本: 8849
+作者: luzyong
+日期: 13:30:26, 2012年4月26日
+信息:
+修改会议考勤状态 常量ATTSTATES
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/detailMeeting.py
+
+版本: 8848
+作者: luzyong
+日期: 13:27:55, 2012年4月26日
+信息:
+会议统计报表考勤状态查询
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/jslib/meetingCalculate.js
+
+版本: 8847
+作者: luzyong
+日期: 13:26:41, 2012年4月26日
+信息:
+增加会议状态查询下拉框样式
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/css/css.css
+
+版本: 8846
+作者: luzyong
+日期: 13:19:06, 2012年4月26日
+信息:
+修改会议属性
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/models/model_meeting.py
+
+版本: 8845
+作者: luzyong
+日期: 13:18:17, 2012年4月26日
+信息:
+
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/templates/MeetingEntity_edit.html
+已修改 : /tags/_20120320/units/adms/mysite/meeting/templates/MeetingExact_opform_AddMeetingExact.html
+已修改 : /tags/_20120320/units/adms/mysite/meeting/templates/MeetingReport.html
+
+版本: 8844
+作者: xjh
+日期: 13:18:16, 2012年4月26日
+信息:
+无消费子系统时考勤机登记的卡号不更新到软件
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/device_http/conv_emp.py
+
+版本: 8843
+作者: xiaoxj
+日期: 13:18:09, 2012年4月26日
+信息:
+门禁设备当考勤用时，考勤原始记录表中数据中缺少序列号和设备名称的值
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/process_comm_data.py
+
+版本: 8842
+作者: luzyong
+日期: 13:17:42, 2012年4月26日
+信息:
+
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/urls.py
+
+版本: 8841
+作者: luzyong
+日期: 13:16:51, 2012年4月26日
+信息:
+会议统计算法修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/meeting/statistics.py
+已修改 : /tags/_20120320/units/adms/mysite/meeting/views.py
+
+版本: 8838
+作者: qj
+日期: 08:51:54, 2012年4月26日
+信息:
+单独IC消费，显示服务器下发命令
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_devcmd.py
+
+版本: 8837
+作者: qj
+日期: 08:51:07, 2012年4月26日
+信息:
+ic消费，黑名单下发，修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8836
+作者: qj
+日期: 08:50:42, 2012年4月26日
+信息:
+单独IC消费，配置文件修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_ic.py
+
+版本: 8834
+作者: huangcm
+日期: 17:42:55, 2012年4月25日
+信息:
+报表—全部门禁事件，经高级查询后，点击查询中的事件描述，选择事件后下拉框不会关闭，点击清除也不会关闭，门设置—联动设置(2处均已修改)
+----
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/templates/AccLinkageIO_list.html
+已修改 : /tags/_20120320/units/adms/mysite/iaccess/templates/Acc_Reportform_allevent.html
+
+版本: 8833
+作者: qj
+日期: 17:29:05, 2012年4月25日
+信息:
+ic消费，退卡（卡状态），修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/views.py
+
+版本: 8832
+作者: qj
+日期: 17:26:14, 2012年4月25日
+信息:
+ic消费，黑名单下发，修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8831
+作者: qj
+日期: 17:25:41, 2012年4月25日
+信息:
+ic消费，退卡（卡状态），修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 8830
+作者: qj
+日期: 17:21:17, 2012年4月25日
+信息:
+ic消费，退卡（卡状态），修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/views.py
+
+版本: 8829
+作者: qj
+日期: 17:18:55, 2012年4月25日
+信息:
+ic消费，退卡（卡状态），修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 8828
+作者: qj
+日期: 17:18:00, 2012年4月25日
+信息:
+ic消费，退卡（卡状态），修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/pos_utils.py
+已修改 : /tags/_20120320/units/adms/mysite/pos/views.py
+
+版本: 8827
+作者: qj
+日期: 17:16:49, 2012年4月25日
+信息:
+ic消费，黑名单下发，修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+
+版本: 8826
+作者: qj
+日期: 16:23:28, 2012年4月25日
+信息:
+修改：人员登记卡号，跟实际发卡过程中选择的人员不一致
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/jslib/pos_ic.js
+
+版本: 8825
+作者: qj
+日期: 16:23:01, 2012年4月25日
+信息:
+修改：人员登记卡号，跟实际发卡过程中选择的人员不一致
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/views.py
+
+版本: 8821
+作者: zhangxl
+日期: 13:19:34, 2012年4月25日
+信息:
+添加考勤的配置文件
+----
+已增加 : /tags/_20120320/units/adms/mysite/settings_att.py
+
+版本: 8819
+作者: qj
+日期: 10:42:25, 2012年4月25日
+信息:
+单独消息子系统的时候，初始化数据库，中去掉多余的夏令时选项
+----
+已修改 : /tags/_20120320/units/adms/mysite/templates/init_models.html
+
+版本: 8818
+作者: qj
+日期: 10:40:30, 2012年4月25日
+信息:
+单独消息子系统的时候，去掉上传人员照片操作
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_ic.py
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_id.py
+
+版本: 8817
+作者: zhangxl
+日期: 09:43:41, 2012年4月25日
+信息:
+修改单独考勤的配置文件
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_att.py
+
+版本: 8815
+作者: zhangxl
+日期: 08:59:41, 2012年4月25日
+信息:
+独立子系统的图片的更新
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/themes/flat/images/images_head.gif
+
+版本: 8805
+作者: zhangxl
+日期: 14:49:29, 2012年4月24日
+信息:
+更新考勤，门禁logo
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/images/login/images_head.gif
+已修改 : /tags/_20120320/units/adms/mysite/media/images/login/logoAtt_zh-cn.jpg
+已修改 : /tags/_20120320/units/adms/mysite/media/images/login/logoZKAccess_zh-cn.jpg
+
+版本: 8804
+作者: zhangxl
+日期: 14:48:56, 2012年4月24日
+信息:
+添加会议模块logo
+----
+已修改 : /tags/_20120320/units/adms/mysite/media/images/images_head.gif
+
+版本: 8801
+作者: qj
+日期: 13:42:25, 2012年4月24日
+信息:
+设备下拉框修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/pos_device_dropdown.py
+
+版本: 8800
+作者: qj
+日期: 13:41:55, 2012年4月24日
+信息:
+手工补消费金额验证修改
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/templates/HandConsume_edit.html
+
+版本: 8799
+作者: qj
+日期: 09:56:03, 2012年4月24日
+信息:
+ID消费手工补消费，错误信息显示
+----
+已修改 : /tags/_20120320/units/adms/mysite/pos/templates/HandConsume_edit.html
+
+版本: 8798
+作者: qj
+日期: 09:55:33, 2012年4月24日
+信息:
+添加引用
+----
+已修改 : /tags/_20120320/units/adms/mysite/utils.py
+
+版本: 8797
+作者: qj
+日期: 09:55:01, 2012年4月24日
+信息:
+ID消费 手工补消费去掉（卡账号，卡流水号显示列）
+----
+已修改 : /tags/_20120320/units/adms/mysite/config_pos_only_id.py
+已修改 : /tags/_20120320/units/adms/mysite/config__add_id.py
+
+版本: 8792
+作者: qj
+日期: 16:26:52, 2012年4月23日
+信息:
+修改：（带IC消费的情况下），如果员工，没有通过正常发卡，只是登记了物理卡号，允许对该人员卡号进行挂失解挂操作。
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 8790
+作者: qj
+日期: 14:57:12, 2012年4月23日
+信息:
+防止IC软件下，ID消费设备连接情况（返回值修改）
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/device_http/device_view.py
+
+版本: 8789
+作者: qj
+日期: 14:56:40, 2012年4月23日
+信息:
+防止IC软件下，ID消费设备连接情况（返回值修改）
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/devview.py
+
+版本: 8787
+作者: qj
+日期: 14:47:12, 2012年4月23日
+信息:
+修改：.单独考勤+门禁，批量发卡中有提示消费相关信息
+----
+已修改 : /tags/_20120320/units/adms/mysite/personnel/models/model_issuecard.py
+
+版本: 8782
+作者: zhangxl
+日期: 10:31:14, 2012年4月23日
+信息:
+修改单独门禁+考勤时删除设备的问题
+----
+已修改 : /tags/_20120320/units/adms/mysite/iclock/models/model_device.py
+

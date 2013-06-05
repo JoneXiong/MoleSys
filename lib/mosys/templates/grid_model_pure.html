@@ -1,0 +1,129 @@
+﻿<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/media/css/flexigrid.pack.css" />
+			{% block custom_css %}
+			{% endblock %}  
+
+	</head>
+<body style=" background:white;">
+{% block content %}
+				{% if search_form %}
+				<!-- search_form start -->	
+				<div class="pageHeader">
+				        <div class="searchBar" id ="id_search">
+				            <table class="searchContent">
+						           {% for field in search_form %}
+						               {% if loop.first %}<tr> {% endif%}
+						                    <td style="text-align:right;">{{ field.label_tag()}}</td> <td style="width:185px">{{ field.as_widget() }}</td>
+						               {% if loop.index is divisibleby 3 %}
+						                   </tr>
+						                   <tr>
+						               {% endif %}
+						               {% if loop.last %}  </tr> {% endif %}
+						           {% endfor %}    
+						               </td></tr>    
+				            </table>
+				            <div class="subBar">
+				                <ul>
+				                    <li>
+				                        <div class="buttonActive">
+				                            <div class="buttonContent">
+				                                <button id="id_header_search">
+				                                   查询
+				                                </button>
+				                            </div>
+				                        </div>
+				                    </li>
+				                    <li>
+				                        <a class="button" id="id_header_clear">
+				                            <span>
+				                               清除
+				                            </span>
+				                        </a>
+				                    </li>
+				                </ul>
+				            </div>
+				        </div>
+				</div>
+				<!-- search_form end -->
+			 {% endif %}
+			
+			<div class="divider"></div>
+				 
+			<!-- grid start -->
+           <div  id="id_main_div" style="margin-top:10px;margin-left:10px;margin-right:10px;">
+				<table class="m_grid"></table>
+           </div>
+		   <!-- grid end -->
+		   <iframe id="export_ifm" width="0" height="0"></iframe>
+{% endblock %}
+</body>
+<script type="text/javascript" src="/media/js/flexigrid.pack.js"></script>
+<script type="text/javascript" src="/media/js/m.gridutils.js" type="text/javascript"></script>
+<script>
+		var urlparams = {{urlparams}};
+		var hide_list = {{hide_list}};
+		var bg_params = "/grid/{{app_label}}/{{model_name}}/?export&reportname={{model_name}}&";
+		var $p = $(document);
+		
+		m_dialog = $.pdialog.getCurrent();
+		if (m_dialog && m_dialog.is(":visible")){
+			$p = m_dialog;
+			var dialog_util = new gridUtil($p,bg_params,hide_list);
+			dialog_util.m_params = urlparams;
+		}
+		else{
+			var m_util = new gridUtil($p,bg_params,hide_list);
+			m_util.m_params = urlparams
+		}
+
+			var m_option = {{grid_option}};
+			m_option["params"] = urlparams;
+			m_obj = $(".m_grid",$p).flexigrid(m_option);
+
+			/*
+			 * 选人
+			 */
+		    function do_select(com,grid)
+			{
+				selected_count = $('.trSelected', grid).length;
+				if (selected_count == 0) {  
+                        alert('请先勾选!');  
+                        return false;  
+				} 
+				names = '';  
+                $('.trSelected td:nth-child(3) div', grid).each(function(i) {  
+                        if (i)  names += ',';  
+                        names += $(this).text();  
+                    });  
+                ids = '';  
+                $('.trSelected td:nth-child(2) div', grid).each(function(i) {  
+                        if (i)  ids += ',';  
+                        ids += $(this).text();  
+                    })  
+				var fname = '{{select_fieldname}}';
+				$("input[name="+fname+"]").val(ids);	//---------------------------------??
+				$("input[name="+fname+"_orgName]").val(names);
+				$.pdialog.closeCurrent();
+			}
+			
+			    function get_select(index)
+				{
+			    	var grid = get_cur_util().get_grid();
+					selected_count = $('.trSelected', grid).length;
+					if (selected_count == 0) {  
+	                        alert('请先勾选!');  
+	                        return;  
+					} 
+	                ids = '';  
+	                $('.trSelected td:nth-child('+(index+1)+') div', grid).each(function(i) {  
+	                        if (i)  ids += ',';  
+	                        ids += $(this).text();  
+	                    })  
+	                return ids;
+				}
+</script>
+	{% block custom_js %}
+	
+	{% endblock %}  
+</html>

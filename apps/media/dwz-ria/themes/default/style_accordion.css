@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+/* Grup */
+#grup_info { color:#183152; background:url(./imgs/info-16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_alarm { color:#183152; background:url(./imgs/alarm16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_disc { color:#183152; background:url(./imgs/disc16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_chat { color:#183152; background:url(./imgs/chat16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_chart { color:#183152; background:url(./imgs/chart16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_calculator { color:#183152; background:url(./imgs/calculator16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_configure { color:#183152; background:url(./imgs/configure16.png);background-repeat:no-repeat; margin-top:4px}
+#grup_computer { color:#183152; background:url(./imgs/computer16.png);background-repeat:no-repeat; margin-top:4px}
+/* menu */
+.menuContent { text-align:center;}
+.grup_menu { width:120px;}
+.grup_menu span{ width:48px; height:48px;display: block;margin: auto;}
+
+#menu_green{background:url(./imgs/48/green.png);background-repeat:no-repeat;}
+#menu_home{background:url(./imgs/48/home.png);background-repeat:no-repeat;}
+#menu_interact{background:url(./imgs/48/interact.png);background-repeat:no-repeat;}
+#menu_monitor{background:url(./imgs/48/monitor.png);background-repeat:no-repeat;}
+#menu_pathing{background:url(./imgs/48/pathing.png);background-repeat:no-repeat;}
+#menu_people{background:url(./imgs/48/people.png);background-repeat:no-repeat;}
+#menu_vault{background:url(./imgs/48/vault.png);background-repeat:no-repeat;}
+#menu_file{background:url(./imgs/48/file.png);background-repeat:no-repeat;}
+#menu_redis{background:url(./imgs/48/redis.png);background-repeat:no-repeat;}

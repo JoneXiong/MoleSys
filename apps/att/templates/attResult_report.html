@@ -1,0 +1,122 @@
+<link rel="stylesheet" type="text/css" href="/media/css/flexigrid.pack.css" />
+<style>
+.flexigrid div.fbutton .export {
+    background: url(/media/images/export.gif) no-repeat center left;
+}
+</style>
+
+{% block content %}
+
+			{% include 'search_form.html' %}	
+				 
+			<!-- grid start -->
+           <div  id="id_main_div" style="margin-top:10px;margin-left:10px;margin-right:10px;">
+				<table class="m_grid" style="display: none"></table>
+           </div>
+		   <!-- grid end -->
+		   <iframe id="export_ifm" width="0" height="0"></iframe>
+{% endblock %}
+{% block extend_js %}
+<script type="text/javascript" src="/media/js/flexigrid.pack.js"></script>
+<script type="text/javascript" src="/media/js/m.gridutils.js" type="text/javascript"></script>
+	{% block custom_js %}
+	
+	{% endblock %}  
+	<script>
+		var urlparams = {{urlparams}};
+		var hide_list = {{hide_list}};
+		var bg_params = "/grid/{{app_label}}/{{model_name}}/?export&reportname={{model_name}}&";
+		var $p = $(document);
+		
+		m_dialog = $.pdialog.getCurrent();
+		if (m_dialog && m_dialog.is(":visible")){
+			$p = m_dialog;
+			var dialog_util = new gridUtil($p,bg_params,hide_list);
+			dialog_util.m_params = urlparams;
+		}
+		else{
+			var m_util = new gridUtil($p,bg_params,hide_list);
+			m_util.m_params = urlparams
+		}
+
+			var m_option = {{grid_option}};
+			m_option["params"] = urlparams;
+			m_obj = $(".m_grid",$p).flexigrid(m_option);
+
+
+			    function get_select(index)
+				{
+			    	var grid = get_cur_util().get_grid();
+					selected_count = $('.trSelected', grid).length;
+					if (selected_count == 0) {  
+	                        alert('请先勾选!');  
+	                        return;  
+					} 
+	                ids = '';  
+	                $('.trSelected td:nth-child('+(index+1)+') div', grid).each(function(i) {  
+	                        if (i)  ids += ',';  
+	                        ids += $(this).text();  
+	                    })  
+	                return ids;
+				}
+				
+				function showDetail(userid)
+				{
+					var option = {
+						width:1150,
+						height:410,
+						mask:true,
+						maxable:false,
+						minable:false,
+						resizable:false,
+						drawable:false
+					}
+					$.pdialog.open('/page/att/OrderAttReport/?pure&userid='+userid, 'OrderReport', '考勤明细', option);
+				}
+			    
+			    $("#id_attcal").click(function(){
+			    	var stStr= $("#id_startDate").val()
+			    	var etStr= $("#id_endDate").val()
+					var st=new Date(stStr.replace(/-/g,"/"));
+					var et=new Date(etStr.replace(/-/g,"/"));
+					if(st>et){
+						alert(gettext("开始日期不能大于结束日期"));
+						return;
+					}
+					if(et>new Date()){
+						alert(gettext("结束日期不能大于今天"));
+						return;
+					}
+					if(((et-st)>31*24*60*60*1000)|| (et.getMonth()>st.getMonth() && et.getDate()>=st.getDate())){
+						alert(gettext("统计只能当月日期，或者天数不能超过开始日期的月份天数！ "));
+						return;			
+					}
+
+					var userids = $("#id_userid").val();
+					var deptids = $("#id_DeptID").val();
+					var badgenumber = $("#id_badgenumber").val();
+					if(userids=="" && deptids=="" && badgenumber==""){
+						alert("请选择需要统计的人员或组织!");
+						return;
+					}
+					if( confirm(gettext("统计的时间可能会较长，请耐心等待"))==false){
+						return ;
+					}
+					//获取条件
+					$.ajax({ 
+				         type: "POST",
+				         url:"/att/AttReCalc/?ComeTime="+stStr+"&EndTime="+etStr+"&userids="+userids+"&deptids="+deptids+"&badgenumber="+badgenumber,
+				         success:function(json){
+				               alert("统计完成");
+				               do_search();
+				          	}
+				     });
+				});
+			    
+				function N2(nc){
+					var tt= "00" + nc.toString();
+				    tt=tt.toString();
+				    return tt.substr(tt.length-2);
+				} 
+	</script>
+{% endblock %}  

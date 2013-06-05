@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>管理控制台</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="/static/dwz-ria/bin/jquery.js" type="text/javascript"></script>
+	<style type="text/css">
+	
+		body {
+			margin-left: 0px;
+			margin-top: 0px;
+			margin-right: 0px;
+			margin-bottom: 0px;
+		}
+		body,td,th {
+			font-size: 12px;
+		}
+		.STYLE1 {
+			font-size: 45px;
+			font-weight: bold;
+			color: #3683C9;
+		}
+		.input {
+			font-size: 14px;
+			line-height: 25px;
+			color: #666666;
+			height: 25px;
+			width: 180px;
+			border-top-style: none;
+			border-right-style: none;
+			border-bottom-style: none;
+			border-left-style: none;
+		}
+		.STYLE2 {color: #FFFFFF}
+		.inputan {
+			height: 30px;
+		}
+		.ts {
+			height: 30px;
+			color: #990000;
+			line-height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<table width="100%"  border="0" cellspacing="5" cellpadding="0">
+	  <tr>
+	    <td height="131" align="center" valign="bottom" ><span class="STYLE1">管理控制台<br/></span></td>
+	  </tr>
+	  <tr>
+	    <td height="338" align="center" bgcolor="#76AADA" >
+	    	<form id = "manager_login" action="" method="post" onkeydown="javasceipt:if(event.keyCode == 13){$('#login_id').click();}  ">
+		    	<table width="300" border="0" cellpadding="9" cellspacing="1">
+			      <tr>
+			        <td width="70" align="right" bgcolor="#65A0D6"><span class="STYLE2">用户名：</span></td>
+			        <td align="left" bgcolor="#65A0D6"><input class="input" type="text" name="username" id="username" /></td>
+			      </tr>
+			      <tr>
+			        <td align="right" bgcolor="#65A0D6" class="STYLE2">密 码：</td>
+			        <td align="left" bgcolor="#65A0D6"><input class="input" type="password" name="password" id="password" /></td>
+			      </tr>
+			      <tr>
+			        <td align="right" bgcolor="#65A0D6" class="STYLE2">&nbsp;</td>
+			        <td align="left" bgcolor="#65A0D6">
+			        	<input class="inputan" type="button"  id = "login_id" value=" 登 录 " onclick = "login();" />
+			            <input class="inputan" type="button" value=" 重 置 " onclick = "reset();" /></td>
+			      </tr>
+			      <tr>
+			      	<td>
+			      	 	<td colspan="2" align="center" ><div class="ts" id= "tip"></div></td>
+			      	</td>
+			      </tr>
+			    </table>
+		    </form>
+		 </td>
+	  </tr>
+	</table>
+	
+	<script>
+		$(function(){
+			$("#username").focus();
+		})
+		function reset(){
+			$("#username").val("");
+			$("#password").val("");
+			return;
+		}
+		function login(){
+			var uname = $.trim($("#username").val());
+		 	var pwd = $.trim($("#password").val());
+		 	
+		 	if (uname=="" || pwd == ""){
+		 		$("#tip").html("用户名或密码不能为空!");
+		 		return;
+		 	}
+		 	serialize_form=$("#manager_login").serialize();
+	        $.ajax({
+	            url:"/login_check",
+	            type:"POST",
+	            data:serialize_form,
+	            dataType:"html",
+	            success:function(msg){
+	                if(msg=='OK'){
+	                	window.location.href="/";
+	                }else{
+	                    $("#password").val('');
+	                    $("#tip").html("用户名或密码不正确!");
+	                }
+	            }
+	        });
+		}
+	</script>
+</body>
+</html>

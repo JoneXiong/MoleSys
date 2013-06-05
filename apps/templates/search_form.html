@@ -1,0 +1,40 @@
+				{% if search_form %}
+				<!-- search_form start -->	
+				<div class="pageHeader">
+				        <div class="searchBar" id ="id_search">
+				            <table class="searchContent">
+						           {% for field in search_form %}
+						               {% if loop.first %}<tr> {% endif%}
+						                    <td style="text-align:right;">{{ field.label_tag()}}</td> <td style="width:185px">{{ field.as_widget() }}</td>
+						               {% if loop.index is divisibleby 3 %}
+						                   </tr>
+						                   <tr>
+						               {% endif %}
+						               {% if loop.last %}  </tr> {% endif %}
+						           {% endfor %}    
+						               </td></tr>    
+				            </table>
+				            <div class="subBar">
+				                <ul>
+				                    <li>
+				                        <div class="buttonActive">
+				                            <div class="buttonContent">
+				                                <button id="id_header_search">
+				                                   查询
+				                                </button>
+				                            </div>
+				                        </div>
+				                    </li>
+				                    <li>
+				                        <a class="button" id="id_header_clear">
+				                            <span>
+				                               清除
+				                            </span>
+				                        </a>
+				                    </li>
+				                </ul>
+				            </div>
+				        </div>
+				</div>
+				<!-- search_form end -->
+			 {% endif %}
