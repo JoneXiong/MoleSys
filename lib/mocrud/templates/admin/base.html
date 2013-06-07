@@ -7,7 +7,7 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>{% block title %}{% endblock %} | 管理</title>
+  <title>{% block title %}{% if model_admin %}{{model_admin.get_display_name()}} | {% endif %}{{apps_dict[model_grup]}}{% endblock %} | MoleCrud</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -36,10 +36,9 @@
         <a class="brand" href="{{ url_for('admin.index') }}">Site Admin <small>{{ branding }}</small></a>
         <ul class="nav">
           <li class="active"><a href="{{ url_for('admin.index') }}">面板</a></li>
-          <li><a href="#">访问主页</a></li>
-		  <li><a href="#">考勤</a></li>
-		  <li><a href="#">门禁</a></li>
-		  <li><a href="#">消费</a></li>
+		  {% for label, app_verb in apps %}
+          <li{% if model_grup == label %} class="active"{% endif %}><a href="/admin/{{label}}">{{app_verb}}</a></li>
+		  {% endfor %}
         </ul>
 
         <form action="{{ url_for('auth.logout') }}" class="navbar-form pull-right" method="get">
@@ -53,20 +52,17 @@
     <div class="row-fluid">
       <div class="span2">
         <div class="well sidebar-nav">
-          <h3>导航1</h3>
           {% block sidebar %}
-            <ul id="nav" class="nav nav-list">
-              {% for iter_admin in model_admins %}
-                <li{% if model_admin == iter_admin %} class="active"{% endif %}><a href="{{ url_for(iter_admin.get_url_name('index')) }}">{{ iter_admin.get_display_name()|fix_underscores }}</a></li>
-              {% endfor %}
-            </ul>
-			<h3>人事</h3>
-            <ul id="nav" class="nav nav-list">
-				<li><a href="#">人员</a></li>
-				<li><a href="#">部门</a></li>
-				<li><a href="#">职位</a></li>
-				<li><a href="#">区域</a></li>
-            </ul>
+
+			{% for grup_verb, icon_class ,menus in get_app_nemus(model_grup) %}
+			<h3>{{ grup_verb }}</h3>
+			<ul id="nav" class="nav nav-list">
+					{% for menu in menus %}
+						<li{% if model_name== menu[3] %} class="active"{% endif %}><a href="{{ menu[1] }}">{{ menu[0]}}</a></li>
+					{% endfor %}
+			</ul>
+			{% endfor %}
+
           {% endblock %}
         </div>
       </div><!-- /sidebar -->
@@ -74,7 +70,7 @@
       <div class="span9">
         <div class="content">
           <div class="page-header">
-            <h1>{% block content_title %}{% endblock %} <small>{% block content_tagline %}{% endblock %}</small></h1>
+            <h2>{% block content_title %}{% endblock %} <small>{% block content_tagline %}{% endblock %}</small></h2>
           </div>
           <ul class="breadcrumb">
             <li><a href="{{ url_for('admin.index') }}">面板</a></li>

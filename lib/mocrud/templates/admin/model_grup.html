@@ -1,16 +1,6 @@
 {% extends "admin/base.html" %}
 
-{% block content_title %}我的面板{% endblock %}
-
-{% block sidebar %}
-<h3>我的常用操作</h3>
-<ul id="nav" class="nav nav-list">
-	<li><a href="#">新增人员</a></li>
-	<li><a href="#">新增部门</a></li>
-	<li><a href="#">新增职位</a></li>
-	<li><a href="#">新增区域</a></li>
-</ul>
-{% endblock %}
+{% block content_title %}{{apps_dict[model_grup]}}主页{% endblock %}
 
 {% block content %}
   {% if panels %}

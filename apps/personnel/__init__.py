@@ -7,5 +7,8 @@ menus = (
 #         ('reportEmp',u'人事报表', 'grup_disc'),
          )
 
+####### 自定义视图 #########
+import routes
+
 from mole.const import TEMPLATE_PATH
 TEMPLATE_PATH.append('./apps/personnel/templates/')

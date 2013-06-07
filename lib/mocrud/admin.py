@@ -17,6 +17,8 @@ from mocrud.filters import FilterMapping, FilterForm, FilterModelConverter
 from mocrud.forms import BaseModelConverter, ChosenAjaxSelectWidget, LimitedModelSelectField
 from mocrud.serializer import Serializer
 from mocrud.utils import get_next, PaginatedQuery, path_to_models, slugify
+from mocrud.auth import Auth
+
 from peewee import BooleanField, DateTimeField, ForeignKeyField, DateField, TextField
 from werkzeug import Headers
 from wtforms import fields, widgets
@@ -89,6 +91,10 @@ class ModelAdmin(object):
 
     filter_mapping = FilterMapping
     filter_converter = AdminFilterModelConverter
+    
+    menu_grup = '_default_grup'
+    visible = True
+    icon_class = 'menu_interact'
 
     # templates, to override see get_template_overrides()
     base_templates = {
@@ -99,8 +105,9 @@ class ModelAdmin(object):
         'export': 'admin/models/export.html',
     }
 
-    def __init__(self, admin, model):
+    def __init__(self, admin, model_grup,  model):
         self.admin = admin
+        self.model_grup = model_grup
         self.model = model
         self.db = model._meta.database
         self.pk = self.model._meta.primary_key
@@ -192,8 +199,10 @@ class ModelAdmin(object):
         return query
 
     def get_extra_context(self):
-        return self.admin.template_helper.get_model_admins()
-        return {}
+        m_dic = self.admin.template_helper.get_model_admins()
+        m_dic['model_grup'] = self.model_grup
+        m_dic['model_name'] = self.get_admin_name()
+        return m_dic
 
     def index(self):
         query = self.get_query()
@@ -441,7 +450,7 @@ class AdminTemplateHelper(object):
         if callable(attr):
             return attr()
         return attr
-
+ 
     def get_form_field(self, form, field_name):
         return getattr(form, field_name)
 
@@ -464,7 +473,13 @@ class AdminTemplateHelper(object):
             return field.verbose_name
 
     def get_model_admins(self):
-        return {'model_admins': self.admin.get_model_admins(), 'branding': self.admin.branding}
+        from mocrud import conf
+        from mosys.sys_view import get_app_nemus
+        return {'branding': self.admin.branding, 
+                'apps':conf.apps_list,
+                'apps_dict':dict(conf.apps_list),
+                'get_app_nemus':get_app_nemus
+                }
 
     def get_admin_url(self, obj):
         model_admin = self.admin.get_admin_for(type(obj))
@@ -553,8 +568,8 @@ class Admin(object):
     def __getitem__(self, item):
         return self._registry[item]
 
-    def register(self, model, admin_class=ModelAdmin):
-        model_admin = admin_class(self, model)
+    def register(self, model_grup, model, admin_class=ModelAdmin):
+        model_admin = admin_class(self, model_grup, model)
         admin_name = model_admin.get_admin_name()   #没有被使用
 
         self._registry[model] = model_admin
@@ -574,6 +589,9 @@ class Admin(object):
 
     def get_model_admins(self):
         return sorted(self._registry.values(), key=lambda o: o.get_admin_name())
+    
+    def get_grup_admins(self,grup_name):
+        return [ e for e in self._registry.values() if e.model_grup==grup_name]
 
     def get_panels(self):
         return sorted(self._panels.values(), key=lambda o: o.slug)
@@ -582,6 +600,7 @@ class Admin(object):
         return render_template('admin/index.html',
             model_admins=self.get_model_admins(),
             panels=self.get_panels(),
+            **self.template_helper.get_model_admins()
         )
 
     def get_blueprint(self, blueprint_name):
@@ -629,6 +648,9 @@ class Admin(object):
         self.configure_routes()
 #        self.register_blueprint()
 
+from mocrud import conf
+from mocrud.auth import auth
+admin = Admin(conf.app, auth)
 
 class Export(object):
     def __init__(self, query, related, fields):

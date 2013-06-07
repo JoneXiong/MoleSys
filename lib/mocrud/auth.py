@@ -85,7 +85,8 @@ class Auth(object):
         return UserAdmin
 
     def register_admin(self, admin_site, model_admin=None):
-        admin_site.register(self.User, self.get_model_admin(model_admin))
+        pass
+#        admin_site.register(self.User, self.get_model_admin(model_admin))
 
     def get_blueprint(self, blueprint_name):
         return None
@@ -225,3 +226,6 @@ class Auth(object):
 #        self.register_blueprint()
 #        self.register_handlers()
 #        self.register_context_processors()
+from mocrud import conf
+from mocrud.db import db
+auth = Auth(conf.app, db)
