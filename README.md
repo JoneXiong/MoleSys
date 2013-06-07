@@ -38,6 +38,9 @@ python server.py
 操作界面
 ![op](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/op.jpg)
 
+Crud示例
+![op](https://github.com/JoneXiong/MoleSys/raw/master/apps/media/show/crud.jpg)
+
 计划
 ======
 1. 加入轻量级的ORM模块支持
