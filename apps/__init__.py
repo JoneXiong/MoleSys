@@ -5,7 +5,7 @@ from mole import route, static_file
 apps_list = (
         ('personnel',u'人事管理'),
         ('att',u'考勤管理'),
-        ('crud_example',u'Crud管理')
+        ('crud_example',u'模型管理')
         )
 
 # 配置公共模板目录
