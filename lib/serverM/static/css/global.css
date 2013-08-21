@@ -1,0 +1,99 @@
+#main {
+	padding: 0 15px;
+}
+
+#footer {
+	margin-top: 50px;
+}
+
+#footer .row-fluid [class*="span"] {
+	min-height: 20px;
+}
+
+#footer a.comment {
+	text-decoration: none;
+}
+
+.module-header {
+	margin-bottom: 30px;
+}
+
+a.black, a.black:hover, a.black:active, a.black:visited {
+	color: black;
+}
+
+/* bootstrap patch */
+.table-borderless td,
+.table-borderless th {
+    border: 0 !important
+}
+.table-layout {
+	margin: 0;
+}
+.table-layout td, .table-layout th {
+	padding-left: 0;
+}
+.table-nopadding td, .table-nopadding th {
+	padding: 0;
+}
+.table td.td-right, .table th.td-right {
+	text-align: right;
+}
+.table td.td-center, .table th.td-center {
+	text-align: center;
+}
+.table td.td-borderless, .table th.td-borderless {
+	border: 0;
+}
+.table-button td, .table-button th {
+	line-height: 26px;
+}
+.table-button td input, .table-button .input-append {
+	margin-bottom: 0;
+}
+.form-horizontal-small .control-label {
+	width: 100px;
+}
+.form-horizontal-small .controls {
+	margin-left: 120px;
+}
+.form-horizontal .control-group-mini {
+	margin-bottom: 10px;
+}
+.control-group-mini .control-label {
+	width: 60px;
+}
+.control-group-mini .controls {
+	margin-left: 75px;
+}
+.navbar .nav > li > a {
+	padding: 10px 13px 10px;
+}
+.navbar .divider-vertical {
+	margin: 0;
+}
+input[type="text"].input-flat {
+	height: 16px;
+}
+.radio.inline, .checkbox.inline {
+	padding-top: 0;
+}
+.controls > .radio:first-child, .controls > .checkbox:first-child {
+	padding-top: 0;
+}
+
+/* CodeMirror patch */
+.CodeMirror {
+	font-family: "Courier New", "Lucida Console", "Lucida Sans Typewriter", "Consolas";
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	line-height: 20px;
+}
+.activeline {background: #e8f2ff !important;}
+.CodeMirror-scroll {
+height: auto;
+overflow-y: hidden;
+overflow-x: auto;
+}
+span.CodeMirror-matchhighlight { background: #e9e9e9 }
+.CodeMirror-focused span.CodeMirror-matchhighlight { background: #e7e4ff; !important }
