@@ -32,6 +32,8 @@ class GridModel(AppPage):
 #    buttons = []#[{},{}]
     grid = None
     _paged = False
+    _binded = False
+    
     def __init__(self, request=None):
         from grid_utils import GridBase
         self.grid = GridBase(self.head,self._GetPageSize())
@@ -129,6 +131,9 @@ class GridModel(AppPage):
 
     def AddContext(self,m_dict):
         self.m_context.update(m_dict)
+        
+    def BindO(self, orm):
+        self._binded = True
         
 class FormAction(object):
     verbose_name=None
