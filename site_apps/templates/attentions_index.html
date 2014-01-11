@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!--[if IE]><![endif]-->
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% block title %}{% if model_admin %}{{model_admin.get_display_name()}} | {% endif %}{{apps_dict[model_grup]}}{% endblock %} | MoleCrud</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.responsive.css') }}">
+  <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/chosen.css') }}">
+  <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/datepicker.css') }}">
+  <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/admin.css') }}">
+
+  <script src="{{ url_for('admin.static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('admin.static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('admin.static', filename='js/bootstrap-datepicker.js') }}"></script>
+  <script src="{{ url_for('admin.static', filename='js/chosen.jquery.min.js') }}"></script>
+  <script src="{{ url_for('admin.static', filename='js/ajax-chosen.min.js') }}"></script>
+  <script src="{{ url_for('admin.static', filename='js/admin.js') }}"></script>
+
+  {% block extra_script %}
+  <script type="text/javascript">
+    $(function() {
+      {% if model_admin.foreign_key_lookups %}
+        {% for field_name, search in model_admin.foreign_key_lookups.items() %}
+          var raw_id = new Admin.ModelAdminRawIDField('{{ field_name }}');
+          raw_id.init({% if instance %}'{{ form.data[field_name]|string }}'{% endif %});
+        {% endfor %}
+      {% endif %}
+
+      $('form select[data-role="chosen"]').chosen();
+      $('.date-widget').datepicker({format: 'yyyy-mm-dd'});
+    });
+  </script>
+  {% endblock %}
+</head>
+
+<body class="{% block body_class %}admin{% endblock %}">
+  <div class="navbar navbar-fixed-top">
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+
+
+      <div class="span9">
+        <div class="content">
+          <div class="page-header">
+            <h2>{% block content_title %}{% endblock %} <small>{% block content_tagline %}{% endblock %}</small></h2>
+          </div>
+          <ul class="breadcrumb">
+            <li>ZKECO 相关注意事项汇总</li>
+			<li style="float:right;"><a href="/admin/attentions/add/">我要提交</a></li>
+            {% block breadcrumbs %}{% endblock %}
+          </ul>
+          {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="alert alert-block alert-{{ category }}">
+              <a class="close" data-dismiss="alert" href="#">×</a>
+              <p>{{ message }}</p>
+            </div>
+          {% endfor %}
+          {% block pre_content %}{% endblock %}
+          {% block content %}
+
+  <form action="." class="form-horizontal" id="model-list" method="post"><input type="hidden" name="action" value="" />
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        {% if model_admin.columns %}
+          {% for column in model_admin.columns %}
+            {% if ordering == column %}
+              {% set sort_by = '-'+column %}
+            {% else %}
+              {% set sort_by = column %}
+            {% endif %}
+            <th width=30>{% if model_admin.column_is_sortable(column) %}<a href="./?{{ update_querystring(request.query_string, 'ordering', sort_by)|safe() }}">{% endif %}{{ get_verbose_name(model_admin.model, column) }}{% if model_admin.column_is_sortable(column) %}</a>{% endif %}</th>
+          {% endfor %}
+        {% else %}
+          <th>{{ model_admin.get_display_name() }}</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for object in query.get_list() %}
+      <tr>
+        {% if model_admin.columns %}
+          {% for column in model_admin.columns %}
+            {% if loop.index == 1 %}
+              <td>{{ get_model_field(object, column) }}</td>
+            {% else %}
+              <td>{{ get_model_field(object, column) }}</td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td><a href="{{ url_for(model_admin.get_url_name('edit'), pk=object.get_id()) }}">{{ object }}</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </form>
+  {% include "admin/includes/pagination.html" %}
+  
+  
+  
+		  {% endblock %}
+        </div><!-- /content -->
+      </div><!-- /row -->
+  </div> <!-- /container-fluid -->
+	<hr />
+	<footer>
+		<p>{% block footer %}Site administration{% endblock %}</p>
+	</footer>
+</body>
+</html>
