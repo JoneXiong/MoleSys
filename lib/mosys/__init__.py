@@ -40,6 +40,12 @@ def media(file):
 ####################### 全局初始化 #######################
 #加载全局模型对象
 from load import ModelScan
-ModelScan()
+apps = None
+
+def setup(tar):
+    global apps
+    apps = tar
+    ModelScan()
+
 #引入路由视图
 import route_func

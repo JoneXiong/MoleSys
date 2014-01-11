@@ -65,8 +65,11 @@
 		var hide_list = {{hide_list}};
 		var bg_params = "/grid/{{app_label}}/{{model_name}}/?export&reportname={{model_name}}&";
 		var $p = $(document);
-		
+		try{
 		m_dialog = $.pdialog.getCurrent();
+		}catch(e){
+			m_dialog = null;
+		}
 		if (m_dialog && m_dialog.is(":visible")){
 			$p = m_dialog;
 			var dialog_util = new gridUtil($p,bg_params,hide_list);

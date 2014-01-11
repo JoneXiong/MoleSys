@@ -118,3 +118,24 @@ def PageView(request, model):
         else:
             response_context.update(page.context)
     return JTemplate(page.template,**response_context)
+
+def FormActionView(request, app_label, model_name,action):
+    from load import FORM_ACTIONS
+    from custom_model import FormAction
+    request.user = None
+    if FORM_ACTIONS.has_key(app_label):
+        if FORM_ACTIONS[app_label].has_key(model_name):
+            form_actions = FORM_ACTIONS[app_label][model_name]
+            for e in form_actions:
+                if e[0]==action:
+                    m_form_action = e[1]
+                    try:
+                        m_form_action().action(request)
+                        return {"status":"ok", "msg":''}
+                    except Exception, e:
+                        return {"status":"err", "msg": '%s'%e.message}
+            return {"status":"err", "msg": u'操作非法'}
+        else:
+            return {"status":"err", "msg": u'操作非法'}
+    else:
+        return {"status":"err", "msg": u'操作非法'}

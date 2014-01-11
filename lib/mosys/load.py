@@ -6,14 +6,15 @@ def getAppPages():
 APP_PAGES = []
 SYS_MENUS = {}
 SYS_MODELS = []
+FORM_ACTIONS = {}
 
 def ModelScan():
-    import apps
+    import mosys
     from importlib import import_module
-    from custom_model import AppPage
-    for app in apps.apps_list:
+    from custom_model import AppPage,FormAction
+    for app in mosys.apps.apps_list:
         app = app[0]
-        app_name = 'apps.%s'%app
+        app_name = '%s.%s'%(mosys.apps.__name__,app)
         try:
             app_models = import_module('.models', app_name)
         except ImportError:
@@ -21,7 +22,8 @@ def ModelScan():
             traceback.print_exc()
         
         SYS_MENUS[app] = {'_default_grup':[]}
-        app_global = import_module('apps.%s'%app)
+        FORM_ACTIONS[app] = {}
+        app_global = import_module('%s.%s'%(mosys.apps.__name__,app))
         if hasattr(app_global,'menus'):
             m_menus = app_global.menus
             for e in m_menus:
@@ -37,6 +39,15 @@ def ModelScan():
                             SYS_MENUS[app][m.menu_grup].append( (m.verbose_name, '/page/%s/%s/'%(app,m.__name__), m.icon_class, '') )
                     else:
                         SYS_MENUS[app]['_default_grup'].append( (m.verbose_name, '/page/%s/%s/'%(app,m.__name__), m.icon_class, '') )
+                if issubclass(m, FormAction):
+                    model_name = m.model_name
+                    if FORM_ACTIONS[app].has_key(model_name):
+                        if m.visible:
+                            FORM_ACTIONS[app][model_name].append( (m.__name__, m) )
+                    else:
+                        FORM_ACTIONS[app][model_name] = []
+                        if m.visible:
+                            FORM_ACTIONS[app][model_name].append( (m.__name__, m) )
                 elif len(m.__bases__)>0 and m.__bases__[0].__name__ in ('CrudModel','BaseModel','Model') and m.__name__ not in ['Model','CrudModel','BaseModel']:
                     SYS_MODELS.append( ('%s.%s'%(app,m.__name__), m) )
                     from mocrud.admin import ModelAdmin,admin
@@ -63,3 +74,10 @@ def ModelScan():
     print '>>> APP_PAGES--------------',APP_PAGES
     print '>>> SYS_MENUS-------------',SYS_MENUS
     print '>>> SYS_MODELS------------',SYS_MODELS
+    
+    
+def GetModel(app_label, model_name):
+    pass
+
+def GetPage(app_label, page_name):
+    pass

@@ -3,8 +3,9 @@ import os
 import traceback;
 from lxml import etree
 
-
-from apps import dbpool,workspace
+import mosys
+dbpool = mosys.apps.dbpool
+workspace = mosys.apps.workspace
 
 def getConn():
     return dbpool.connection()

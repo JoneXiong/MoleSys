@@ -23,7 +23,7 @@ def add_route(func, path=None, method='GET', no_hooks=False, decorate=None,
     '''
     添加路由
     '''
-    from mole.mole import app, makelist
+    from mole.mole import app, makelist,yieldroutes
     m_app = app()
     # @route can be used without any parameters
     if callable(path): path, callback = None, path

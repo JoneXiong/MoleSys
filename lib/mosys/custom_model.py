@@ -23,6 +23,7 @@ class GridModel(AppPage):
     m_context = {}
     template = 'grid_model_pure.html'
     visible = False
+    _firstrun = True
     
     head = {}
     option = {}
@@ -35,6 +36,8 @@ class GridModel(AppPage):
         from grid_utils import GridBase
         self.grid = GridBase(self.head,self._GetPageSize())
         self.request = None
+        self.hide_list = []
+        self.m_context = {}
         
     def GetHeads(self):
         return self.grid.fields
@@ -62,8 +65,10 @@ class GridModel(AppPage):
     
     def context(self):
         m_HeadDic = self.grid.HeadDic()
+        app_label = self.app_menu
+        model_name = self.__class__.__name__
         m_init_option = {
-            "url":"/grid/%s/%s/"%(self.app_menu,self.__class__.__name__),
+            "url":"/grid/%s/%s/"%(app_label, model_name),
             "dataType":"json",
             "usepager": True,
             "useRp": True,
@@ -79,6 +84,21 @@ class GridModel(AppPage):
             'findtext': '查找'
               }
         m_init_option.update(self.option)
+        if self.__class__._firstrun:
+            from load import FORM_ACTIONS
+            if FORM_ACTIONS.has_key(app_label):
+                if FORM_ACTIONS[app_label].has_key(model_name):
+                    m_form_actions = FORM_ACTIONS[app_label][model_name]
+                    if len(m_form_actions)>0:
+                        if m_init_option.has_key("buttons"):
+                            tar = m_init_option["buttons"]
+                        else:
+                            m_init_option["buttons"]=[]
+                            tar = m_init_option["buttons"]
+                        for e in m_form_actions:
+                            tar.append( {"name": e[1].verbose_name, "bclass": e[1].icon, "onpress" : "$%s$"%e[0]} )
+            self.__class__._firstrun=False
+        
         m_HeadDic.update(m_init_option)
         addition = {"grid_option":smart_str(json_dumps(m_HeadDic)).replace('"$','').replace('$"','')}
         addition["hide_list"] = self.hide_list
@@ -106,3 +126,19 @@ class GridModel(AppPage):
     def SetHide(self,filed):
         self.grid.fields[filed]["hide"] = True
         self.hide_list.append(self.grid.GetFieldNames().index(filed))
+
+    def AddContext(self,m_dict):
+        self.m_context.update(m_dict)
+        
+class FormAction(object):
+    verbose_name=None
+    icon = "export_xls"
+    model_name = None
+    menu_index=0
+    visible = True
+    
+    def __init__(self, request=None):
+        pass
+    
+    def action(self,request=None):
+        pass
