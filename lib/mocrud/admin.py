@@ -20,7 +20,7 @@ from mocrud.utils import get_next, PaginatedQuery, path_to_models, slugify
 from mocrud.auth import Auth
 
 from peewee import BooleanField, DateTimeField, ForeignKeyField, DateField, TextField
-from werkzeug import Headers
+#from werkzeug import Headers
 from wtforms import fields, widgets
 from ormfields import ModelSelectField, ModelSelectMultipleField, ModelHiddenField
 from ormform import model_form
