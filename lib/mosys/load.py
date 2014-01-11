@@ -49,6 +49,9 @@ def ModelScan():
                         if m.visible:
                             FORM_ACTIONS[app][model_name].append( (m.__name__, m) )
                 elif len(m.__bases__)>0 and m.__bases__[0].__name__ in ('CrudModel','BaseModel','Model') and m.__name__ not in ['Model','CrudModel','BaseModel']:
+                    if hasattr(m,"load"):
+                        if not m.load:
+                            continue
                     SYS_MODELS.append( ('%s.%s'%(app,m.__name__), m) )
                     from mocrud.admin import ModelAdmin,admin
                     m_admin = None
