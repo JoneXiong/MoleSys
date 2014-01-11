@@ -6,11 +6,16 @@ def set_lib_path():
     sys.path.append('./lib')
 set_lib_path()
 
-#安装的apps、mosys系统模块(有先后顺序)
+#安装Mosys apps、mosys系统模块(有先后顺序)
 import apps
-import mocrud
 import mosys
+mosys.setup(apps)
+import mocrud
 
+
+#安装的PyRedisAdmin 和 serverM 这个两个Mole app
+import PyRedisAdmin.routes
+import serverM.routes
 
 #加入SessionMiddleware 中间件
 from mole.sessions import SessionMiddleware
@@ -22,4 +27,4 @@ app = SessionMiddleware(app=apps.app, cookie_key=apps.COOKIE_KEY,no_datastore=Tr
 #运行服务器
 from mole import run
 if __name__  == "__main__":
-    run(app=app,host='localhost', port=8081)
+    run(app=app,host='0.0.0.0', port=8081)
