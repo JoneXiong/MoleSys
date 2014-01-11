@@ -633,7 +633,7 @@ def authenticator(login_url = '/login'):
                 try:
                     session = get_current_session()
                     username = session["username"]
-                except (KeyError, TypeError):
+                except (KeyError, TypeError, AttributeError):
                     redirect(login_url)
                 return handler(*a, **ka)
             return check_auth
