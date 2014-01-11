@@ -2,6 +2,7 @@
 from mosys.custom_model import AppPage,GridModel
 from mosys import forms
 
+import model_custom_sql as sqlUtil
 from apps.personnel.common import GetAuthoIDs
 
     
@@ -39,7 +40,8 @@ class DeptSelect(GridModel):
         #设置sql
         from mosys.sql_utils import  get_sql
         self.grid.sql = get_sql("sqls","dept_select")
-      
+#        self.grid.sql_data = "select DeptID,code,DeptName from departments  where status=0 LIMIT 0,20"
+            
         #设置 colum 属性
         self.grid.fields["DeptID"]["width"]=10
         self.grid.fields["code"]["width"]=200

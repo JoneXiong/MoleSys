@@ -1,0 +1,90 @@
+﻿<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/media/css/flexigrid.pack.css" />
+			{% block custom_css %}
+			{% endblock %}  
+
+	</head>
+<body style=" background:white;">
+				
+		    {% include 'search_form.html' %}		
+			
+			<div class="divider"></div>
+				 
+			<!-- grid start -->
+           <div  id="id_main_div" style="margin-top:10px;margin-left:10px;margin-right:10px;">
+				<table class="m_grid"></table>
+           </div>
+		   <!-- grid end -->
+<div class="pageContent" style="margin:0px;padding:0px;">
+        <form method="post" class="pageForm" onkeydown="if(event.keyCode==13){return false;}"  id="id_edit_form" onsubmit="return m_submit(this)" enctype="multipart/form-data" action="/personnel/change_postion_handle/">
+            <div class="pageFormContent" layoutH="450">
+            <input type="hidden" name="userids" value="{{ids}}"/>
+            <input type="hidden" name="postionids" id="postionids" value=""/>
+<p><label for="reason" >调动原因</label> <input id="reason" type="textarea"  name="reason" /></p>
+       
+		</div>
+        
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+        </form>
+ </div>
+</body>
+<script type="text/javascript" src="/media/js/flexigrid.pack.js"></script>
+<script type="text/javascript" src="/media/js/m.gridutils.js" type="text/javascript"></script>
+<script>
+		var bg_params = "/grid/{{app_label}}/{{model_name}}/?export&reportname={{verbose_name}}&format=xls&";
+		var $p = $(document);
+		m_dialog = $.pdialog.getCurrent();
+		if (m_dialog && m_dialog.is(":visible")){
+			$p = m_dialog;
+			var dialog_util = new gridUtil($p,bg_params);
+		}
+		else{
+			var m_util = new gridUtil($p,bg_params);
+		}
+
+			m_obj = $(".m_grid",$p).flexigrid({{grid_option}});
+
+		    function postionid_select(index)
+			{
+		    	var grid = get_cur_util().get_grid();
+				selected_count = $('.trSelected', grid).length;
+				if (selected_count == 0) {  
+                        alert('请先勾选!');  
+                        return false;  
+				}
+                ids = '';  
+                $('.trSelected td:nth-child('+(index+1)+') div', grid).each(function(i) {  
+                        if (i)  ids += ',';  
+                        ids += $(this).text();  
+                    })
+                $("#postionids").val(ids);
+				return true;
+			}
+			
+			function m_dialogAjaxDone(json){ 
+			 DWZ.ajaxDone(json); 
+			  if (json.statusCode == DWZ.statusCode.ok){ 
+			   if (json.navTabId){ 
+			   navTab.reload(json.forwardUrl, {}, json.navTabId); 
+			   } 
+			  $.pdialog.closeCurrent();
+			  //do_search(); 
+			  } 
+			} 
+			function m_submit(form){
+				if (postionid_select(1))
+				{
+					return validateCallback(form, m_dialogAjaxDone)
+				}
+				else{
+					return false
+				}
+			}
+</script>
+</html>

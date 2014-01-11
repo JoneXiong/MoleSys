@@ -33,6 +33,20 @@ function do_search() {
 			params : m_params
 		}).flexReload();
 }
+
+/*
+ * 添加'查询'条件事件触发
+ */
+function update_search(opt) {
+		var m_util = get_cur_util()
+		var m_params = m_util.m_params;
+		m_params.push(opt);
+		m_util.m_gird.flexOptions({
+			newp :1,
+			params : m_params
+		}).flexReload();
+}
+
 /*
  * '清楚'事件触发
  */
@@ -57,7 +71,11 @@ function do_clear() {
  * 获取当前grid util
  */
 function	get_cur_util(){
-	m_dialog = $.pdialog.getCurrent();
+	try {
+		m_dialog = $.pdialog.getCurrent();
+	}catch(e){
+			m_dialog = null;
+			}
 	if (m_dialog && m_dialog.is(":visible")){
 		return dialog_util
 	}

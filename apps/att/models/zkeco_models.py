@@ -2,8 +2,6 @@ from peewee import *
 
 database = MySQLDatabase('zkeco_db', **{'passwd': 'root', 'user': 'root'})
 
-class UnknownFieldType(object):
-    pass
 
 class BaseModel(Model):
     class Meta:

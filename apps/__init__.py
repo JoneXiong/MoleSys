@@ -5,7 +5,8 @@ from mole import route, static_file
 apps_list = (
         ('personnel',u'人事管理'),
         ('att',u'考勤管理'),
-        ('crud_example',u'模型管理')
+        ('crud_example',u'模型管理'),
+#        ('comm',u'一卡通系统通讯层'),
         )
 
 # 配置公共模板目录
@@ -43,7 +44,7 @@ from DBUtils.PooledDB import PooledDB
 ############ Mssql #########
 import pymssql as pyDB
 conn_args = {
-               'host':'127.0.0.1\SQLEXPRESS',
+               'host':'JOHAN\SQLEXPRESS',
                 'user':'sa', 
                 'charset':'utf8',
                 'password':'123123', 

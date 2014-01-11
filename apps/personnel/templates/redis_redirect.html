@@ -1,0 +1,51 @@
+<script language="JavaScript">
+	function showDetail(key){
+		navTab.openTab('redis_redirect', "/view_redirect?s=0&key="+key, {title:"Redis数据查看", external:true}); 
+	}
+</script>
+
+<table class="table">
+		<thead>
+			<tr>
+				<th width="180">序列号</th>
+				<th width="180">IP地址</th>
+				<th width="180">区域</th>
+				<th width="180">命令数</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in table_data %}
+			<tr>
+				<td>{{row[0]}}</td>
+				<td>{{row[1]}}</td>
+				<td>{{row[2]}}</td>
+				<td><a href='javascript:showDetail("device:"+{{row[0]}}+":update")'><font color="blue">查看</font></a>&nbsp;&nbsp {{row[3]}}</td>
+			</tr>
+			{% endfor %}
+		<tbody>
+</table>
+<br>
+<div class="divider"></div>
+
+<div style=" padding:10px;">
+	&nbsp;&nbsp 
+	<label>输入Key：</label>
+	<input id="m_key" type="text" size="30" class="textInput valid">
+	<button onclick="showDetail($('#m_key').val())">查询</button>
+	<br>
+	<br>
+	<textarea cols="111" rows="10">
+employee:7611:info
+area:1:employees
+area:1:devices
+device:6221661510600:data
+device:6221661510600:update
+server:update
+	</textarea>
+</div>
+
+<div style="padding:10px">
+	模拟请求
+	<div class="divider"></div>
+<a  target="navTab" rel="mnqj" href="http://127.0.0.1:{{web_port}}/iclock/cdata?SN=123456789">http://127.0.0.1:{{web_port}}/iclock/cdata?SN=123456789</a>
+</div>

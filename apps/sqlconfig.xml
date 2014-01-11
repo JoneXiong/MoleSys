@@ -3,8 +3,5 @@
 	<dirs>
 		<dir path="apps/att/sql" app="att"/>
 		<dir path="apps/personnel/sql" app="personnel"/>
-		<dir path="apps/iclock/sql" app="iclock"/>
-		<dir path="apps/pos/sql" app="pos"/>
-		<dir path="apps/iaccess/sql" app="iaccess"/>
 	</dirs>
 </firesource>

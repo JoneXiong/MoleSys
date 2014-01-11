@@ -2,6 +2,8 @@
 from mosys.custom_model import AppPage,GridModel
 from mosys import forms
 
+
+import model_custom_sql as sqlUtil
 from apps.personnel.common import GetAuthoIDs
 
 class EmpSelect(GridModel):
@@ -40,7 +42,7 @@ class EmpSelect(GridModel):
         super(EmpSelect, self).__init__()
         #设置sql
         from mosys.sql_utils import  get_sql
-        self.grid.sql = get_sql("sqls","emp_select")
+        self.grid.sql = get_sql("sqls","emp_select")#sqlUtil.getEmpSelectSql()
          
         #设置 colum 属性
         self.grid.fields["userid"]["width"]=10

@@ -10,4 +10,4 @@ menus = (
 import routes
 
 from mole.const import TEMPLATE_PATH
-TEMPLATE_PATH.append('./apps/att/templates/')
+TEMPLATE_PATH.append('./apps/crud_example/templates/')

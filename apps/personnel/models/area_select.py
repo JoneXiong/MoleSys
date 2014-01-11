@@ -2,6 +2,8 @@
 from mosys.custom_model import AppPage,GridModel
 from mosys import forms
 
+
+import model_custom_sql as sqlUtil
 from apps.personnel.common import GetAuthoIDs
     
 class AreaSelect(GridModel):
