@@ -77,8 +77,10 @@ class GridBase(object):
                     self.sql_count = 'select count(1) from (%s) as m'%self.sql
                 ''' 查询sql语句得到记录数 '''
                 rows = self._ExecSql(self.sql_count)
-                ret = rows[0][0]
-                pass
+                if rows:
+                    ret = rows[0][0]
+                else:
+                    ret = 0
         else:
             ret = len(self.CalculateItems)
         return ret
@@ -92,7 +94,15 @@ class GridBase(object):
                     if self.pagesize==0:
                         self.sql_data = self.sql_order
                     else:
-                        self.sql_data = 'select * from (%s) t where t.r>%s and t.r<=%s'%(self.sql_order,self._begin,self._end)
+                        from sql_utils import curr_db_engine_name
+                        if curr_db_engine_name == "sqlserver":
+                            self.sql_data = 'select * from (%s) t where t.r>%s and t.r<=%s'%(self.sql_order,self._begin,self._end)
+                        elif curr_db_engine_name == "mysql":
+                            self.sql_data = ' %s LIMIT  %s,%s'%(self.sql_order,self._begin,(self._end-self._begin))
+                        elif curr_db_engine_name == "postgresql":
+                            self.sql_data = ' %s LIMIT %s  OFFSET %s'%(self.sql_order,(self._end-self._begin),self._begin)
+                        elif curr_db_engine_name == "oracle":
+                            self.sql_data = 'SELECT * FROM (SELECT t.*, ROWNUM RN FROM (%s) t WHERE ROWNUM <= %s)WHERE RN > %s'%(self.sql_order,self._end,self._begin)
     #                    self.sql_data = 'select  a.*,row_number() as r from (%s) as a where r>=%s and r<=%s '%(self.sql,self._begin,self._end)#
     #                    self.sql_data = 'select top %s t.* from (%s) t where t.row not in (select top %s a.row from (%s) a order by a.row) order by t.row'%(self.pagesize,self.sql,self._begin,self.sql)
     #                    self.sql_data = '%s LIMIT %s,%s  '%(self.sql,self._begin,self.pagesize)
@@ -176,19 +186,42 @@ class GridBase(object):
         内置的处理查询和排序的操作
         '''
         try:
-            if arg.has_key("query"):
+            from sql_utils import curr_db_engine_name
+            if curr_db_engine_name == "sqlserver":
                 if not self.sql_count:
                     self.sql_count = 'select count(1) from (%s) a'%self.sql
-                self.sql ="select * target_from (%s) a where %s like '%s' "%(self.sql,arg["qtype"],'%%'+arg["query"]+'%%')
-            else:
+                if arg.has_key("query"):
+                    self.sql ="select * target_from (%s) a where %s like '%s' "%(self.sql,arg["qtype"],'%%'+arg["query"]+'%%')
+                else:
+                    self.sql ="select * target_from (%s) a "%self.sql
+                if arg.has_key("sortname"):
+                    self.sql_order = self.sql.replace('target_from', ',row_number() over (order by %s %s) as r from'%(arg["sortname"],arg["sortorder"]))
+                else:
+                    self.sql_order = self.sql.replace('target_from', ',row_number() over (order by %s desc) as r from'%self.__fieldnames[0])
+                    
+            elif curr_db_engine_name == "mysql" or curr_db_engine_name == "postgresql":
                 if not self.sql_count:
                     self.sql_count = 'select count(1) from (%s) a'%self.sql
-                self.sql ="select * target_from (%s) a "%self.sql
-                
-            if arg.has_key("sortname"):
-                self.sql_order = self.sql.replace('target_from', ',row_number() over (order by %s %s) as r from'%(arg["sortname"],arg["sortorder"]))
-            else:
-                self.sql_order = self.sql.replace('target_from', ',row_number() over (order by %s desc) as r from'%self.__fieldnames[0])
+                if arg.has_key("query"):
+                    self.sql ="select * from  (%s) a where a.%s like '%s' "%(self.sql,arg["qtype"],'%%'+arg["query"]+'%%')
+                else:
+                    self.sql ="select * from  (%s) a "%self.sql
+                if arg.has_key("sortname"):
+                    self.sql_order =" %s  order by %s %s" %(self.sql,arg["sortname"],arg["sortorder"])
+                else:
+                    self.sql_order =" %s  order by %s  desc " %(self.sql,self.__fieldnames[0])
+                    
+            elif curr_db_engine_name == "oracle":
+                if not self.sql_count:
+                    self.sql_count = 'select count(1) from (%s) a'%self.sql
+                if arg.has_key("query"):
+                    self.sql ="select * from  (%s) a where a.%s like '%s' "%(self.sql,arg["qtype"],'%%'+arg["query"]+'%%')
+                else:
+                    self.sql ="select * from  (%s) a "%self.sql
+                if arg.has_key("sortname"):
+                    self.sql_order =" %s  order by %s %s" %(self.sql,arg["sortname"],arg["sortorder"])
+                else:
+                    self.sql_order =" %s  order by %s  desc " %(self.sql,self.__fieldnames[0])
         except:
             pass
         
