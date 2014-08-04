@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 def get_app_nemus(app_label):
+    import mosys
     from load import SYS_MENUS
     from importlib import import_module
     if SYS_MENUS.has_key(app_label):
         app_menu = SYS_MENUS[app_label]
-        app_global = import_module('apps.%s'%app_label)
+        app_global = import_module('%s.%s'%(mosys.apps.__name__, app_label) )
         ret_data = []
         if hasattr(app_global,'menus'):
             init_menu = app_global.menus
