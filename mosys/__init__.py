@@ -2,6 +2,8 @@
 '''
 用于构建Mole系统页面基础架构
 '''
+import os
+
 import mole.const
 mole.const.ERROR_PAGE_TEMPLATE = """
 %try:
@@ -28,11 +30,19 @@ mole.const.ERROR_PAGE_TEMPLATE = """
 """
 
 from mole.const import TEMPLATE_PATH
-TEMPLATE_PATH.append('./lib/mosys/templates/')
+cur = os.path.split(os.path.realpath(__file__))[0]
+templates_path = os.path.join(cur,'templates')
+TEMPLATE_PATH.append(templates_path)
 
-from mole import route,static_file
+
 # 配置静态目录
-@route('/tmpfile/:file#.*#')
+from mole import route,static_file
+static_path = os.path.join(cur,'static')
+@route('/static_mosys/:filename#.*#',name='mosys.static')
+def admin_static(filename):
+    return static_file(filename, root=static_path)
+
+@route('/tmpfile/:file#.*#')    #导出供下载的目录
 def media(file):
     return static_file(file, root='./tmpfile')
 

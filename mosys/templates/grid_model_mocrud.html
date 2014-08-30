@@ -1,0 +1,40 @@
+﻿{% extends "app_page_mocrud.html" %}
+
+{% block extra_script %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('mosys.static', filename='css/flexigrid_gray.css') }}" />
+<script type="text/javascript" src="{{ url_for('mosys.static', filename='js/flexigrid.pack.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('mosys.static', filename='js/m.gridutils.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+	<!-- grid start -->
+	<div  id="id_main_div" style="margin-top:10px;margin-left:10px;margin-right:10px;">
+		<table class="m_grid"></table>
+	</div>
+	<!-- grid end -->
+	<iframe id="export_ifm" width="0" height="0"></iframe>
+	<script>
+			var urlparams = {{urlparams}};
+			var hide_list = {{hide_list}};
+			var bg_params = "/grid/{{app_label}}/{{model_name}}/?export&reportname={{model_name}}&";
+			var $p = $(document);
+			try{
+			m_dialog = $.pdialog.getCurrent();
+			}catch(e){
+				m_dialog = null;
+			}
+			if (m_dialog && m_dialog.is(":visible")){
+				$p = m_dialog;
+				var dialog_util = new gridUtil($p,bg_params,hide_list);
+				dialog_util.m_params = urlparams;
+			}
+			else{
+				var m_util = new gridUtil($p,bg_params,hide_list);
+				m_util.m_params = urlparams
+			}
+	
+				var m_option = {{grid_option}};
+				m_option["params"] = urlparams;
+				m_obj = $(".m_grid",$p).flexigrid(m_option);
+	</script>
+{% endblock %}

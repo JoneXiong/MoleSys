@@ -1,4 +1,6 @@
 # coding=utf-8
+import sys
+
 from mole_api import JTemplate, HTTPError
 
    
@@ -108,7 +110,9 @@ def PageView(request, model):
                         'urlparams':m_params,
                         'select_fieldname':request.GET.get('fieldname',''),
                         'ids':request.GET.get('ids',''),
+                        'page': page,
                         'verbose_name':page.verbose_name}
+
 #    if not page.template.endswith('_window.html'):
 #        page.template = page.template.replace(".html","_pure.html")
 
@@ -117,6 +121,14 @@ def PageView(request, model):
             response_context.update(page.context())
         else:
             response_context.update(page.context)
+            
+    if 'mocrud' in sys.modules.keys():
+        from mocrud.admin import admin
+        response_context['model_grup'] = page.app_menu
+        response_context["model_admins"] = admin.get_model_admins()
+        response_context["panels"] = admin.get_panels()
+        response_context.update( admin.template_helper.get_helper_context() )
+            
     return JTemplate(page.template,**response_context)
 
 def FormActionView(request, app_label, model_name,action):

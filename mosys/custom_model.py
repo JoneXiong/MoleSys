@@ -7,7 +7,7 @@ class AppPage(object):
     menu_grup = '_default_grup'
     menu_index=0
     context = {}
-    template = 'app_page.html'
+    template = 'app_page_mocrud.html'
     visible = True
     
     def __init__(self, request=None):
@@ -21,7 +21,7 @@ class GridModel(AppPage):
     app_menu =None
     menu_index=0
     m_context = {}
-    template = 'grid_model_pure.html'
+    template = 'grid_model_mocrud.html'
     visible = False
     _firstrun = True
     

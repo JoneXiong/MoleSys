@@ -33,6 +33,8 @@ def ModelScan():
             m=app_models.__getattribute__(attr)
             try:
                 if issubclass(m, AppPage) and m.__name__ not in ['AppPage','GridModel']:
+                    if not m.app_menu:
+                        m.app_menu = app
                     APP_PAGES.append( ('%s.%s'%(app,m.__name__), m) )
                     if SYS_MENUS[app].has_key(m.menu_grup):
                         if m.visible:
