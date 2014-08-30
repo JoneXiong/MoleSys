@@ -1,10 +1,29 @@
 @charset "UTF-8";
 /* CSS Document */
 
+.m_grid  td div {width:50px}
+.hDivBox th div {width:50px}
+
+	.flexigrid div.fbutton .export_pdf
+		{
+			background: url(images_gray/export_pdf.png) no-repeat center left;
+		}
+	.flexigrid div.fbutton .export_xls
+		{
+			background: url(images_gray/export_xls.png) no-repeat center left;
+		}
+	.flexigrid div.fbutton .export_csv
+		{
+			background: url(images_gray/export_csv.png) no-repeat center left;
+		}
 /*add button*/		
 	.flexigrid div.fbutton .add
 		{
 			background: url(images_gray/add.png) no-repeat center left;
+		}
+	.flexigrid div.fbutton .select
+		{
+			background: url(images_gray/select.gif) no-repeat center left;
 		}	
 
 /*delete button*/		
