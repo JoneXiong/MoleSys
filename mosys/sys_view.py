@@ -12,7 +12,8 @@ def get_app_nemus(app_label):
             init_menu = app_global.menus
             for e in init_menu:
                 if app_menu.has_key(e[0]):
-                    ret_data.append( (e[1],e[2],app_menu[e[0]]) )
+                    m_menu = app_menu[e[0]]
+                    ret_data.append( (e[1],e[2],sorted(m_menu,cmp = lambda x,y:cmp(x[4],y[4]) )  ) )
         m_default_grup = app_menu['_default_grup']
         if len(m_default_grup):
             ret_data.append( (u'其他', 'grup_configure',m_default_grup) )
