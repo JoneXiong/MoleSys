@@ -17,3 +17,7 @@ def register_op(app_label, model_name, op_cls):
     m_model.Admin.ops = m_ops
 #    m_admin = admin._registry[m_model]
 #    m_admin.ops.append(op_cls)
+
+def register_page(page_cls, name=None):
+    from mocrud.admin import admin
+    admin.register_page(page_cls,name)

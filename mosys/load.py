@@ -68,7 +68,8 @@ def ModelScan():
                         if m.visible:
                             SYS_MENUS[app][m.menu_grup].append( (m.verbose_name, '/page/%s/%s/'%(app,m.__name__), m.icon_class, '', m.menu_index) )
                     else:
-                        SYS_MENUS[app]['_default_grup'].append( (m.verbose_name, '/page/%s/%s/'%(app,m.__name__), m.icon_class, '', m.menu_index) )
+                        if m.visible:
+                            SYS_MENUS[app]['_default_grup'].append( (m.verbose_name, '/page/%s/%s/'%(app,m.__name__), m.icon_class, '', m.menu_index) )
                 if issubclass(m, FormAction):
                     model_name = m.model_name
                     if FORM_ACTIONS[app].has_key(model_name):
@@ -115,6 +116,17 @@ def ModelScan():
     if len(SYS_MODELS)>0:
         from mocrud.admin import admin
         admin.setup()
+        m_pages = admin.get_pages()
+        for m in m_pages:
+            app = m.app_menu
+            if SYS_MENUS.has_key(app):
+                if SYS_MENUS[app].has_key(m.menu_grup):
+                    if m.visible:
+                        SYS_MENUS[app][m.menu_grup].append( (m.verbose_name, '/admin/fp/%s/'%m.__class__.__name__, m.icon_class, m.__class__.__name__, m.menu_index) )
+                else:
+                    if m.visible:
+                        SYS_MENUS[app]['_default_grup'].append( (m.verbose_name, '/admin/fp/%s/'%m.__class__.__name__, m.icon_class, m.__class__.__name__, m.menu_index) )
+    
     print '>>> APP_PAGES--------------',APP_PAGES
     print '>>> SYS_MENUS-------------',SYS_MENUS
     print '>>> SYS_MODELS------------',SYS_MODELS
